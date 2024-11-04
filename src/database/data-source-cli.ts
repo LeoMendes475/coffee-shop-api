@@ -10,7 +10,7 @@ const dataSourceOptions = new DataSource({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
   entities: [path.join(__dirname, '/../domain/entities/*.entity.{js,ts}')],
-  migrations: ['dist/src/database/migrations/*{.ts,.js}'],
+  migrations: ['./migrations/*{.ts,.js}'],
 });
 
 dataSourceOptions

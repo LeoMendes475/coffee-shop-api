@@ -5,6 +5,7 @@ import {
   DeleteDateColumn,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { v4 as uuid } from 'uuid';
 
 @Entity({ name: 'products_categories' })
 export class CategoryEntity {
@@ -22,4 +23,18 @@ export class CategoryEntity {
 
   @DeleteDateColumn({ name: 'deletedAt' })
   deletedAt: Date;
+
+  constructor(props: {
+    name: string;
+    description: string;
+    categoryId?: string;
+    createdAt?: Date;
+    deletedAt?: Date | null;
+  } = {} as any,
+  id?: string,) {
+    Object.assign(this, props);
+
+    this.id = id ?? uuid();
+    this.createdAt = props?.createdAt ?? new Date();
+  }
 }

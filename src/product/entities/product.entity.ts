@@ -53,18 +53,16 @@ export class ProductEntity {
       createdAt?: Date;
       updatedAt?: Date | null;
       deletedAt?: Date | null;
-    },
+    } = {} as any,
     id?: string,
   ) {
-    if (!props.name) throw new Error('Name is required');
-    if (props.value === undefined || props.value < 0)
-      throw new Error('Value is required and must be non-negative');
-    if (props.quantityAvailable === undefined || props.quantityAvailable < 0)
-      throw new Error('Quantity is required and must be non-negative');
-    if (!props.categoryId) throw new Error('Category ID is required');
+    // if (!props.name) console.log("teste");
+    // if (props.value === undefined || props.value < 0) throw new Error('Value is required and must be non-negative');
+    // if (props.quantityAvailable === undefined || props.quantityAvailable < 0) throw new Error('Quantity is required and must be non-negative');
+    // if (!props.categoryId) throw new Error('Category ID is required');
 
     Object.assign(this, props);
     this.id = id ?? uuid();
-    props.createdAt = props.createdAt ?? new Date();
+    this.createdAt = props?.createdAt ?? new Date();
   }
 }

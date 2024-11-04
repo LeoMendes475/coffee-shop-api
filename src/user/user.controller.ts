@@ -2,28 +2,29 @@ import { Body, Controller, Get, Post, Res } from '@nestjs/common';
 import { Response } from 'express';
 import { CreateUserDto } from './dto';
 
-import { UserService } from './user.service';
+import { CreateUserUseCase } from './use-cases/create-user.use-case';
+import { ListAllUsersUseCase } from './use-cases/list-all-users.use-case';
 
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly createUserUseCase: CreateUserUseCase,
+    private readonly listAllUsersUseCase: ListAllUsersUseCase
+  ) {}
 
   @Get()
-  async allUsers(@Res() response: Response): Promise<any> {
-    const usersList = await this.userService.getAllUsers();
+  async findAllUsers(@Res() response: Response): Promise<any> {
+    const usersList = await this.listAllUsersUseCase.execute();
 
     return response.status(200).json(usersList);
   }
 
   @Post()
   async createUser(@Body() dto: CreateUserDto, @Res() response: Response) {
-    const { message, createdUser, errorMessage } =
-      await this.userService.createUser(dto);
+    const user = await this.createUserUseCase.execute(dto);
 
-    if (!createdUser) return response.status(400).json({ message });
+    if (!user) return response.status(500).json("Server error");
 
-    if (errorMessage) return response.status(500).json({ errorMessage });
-
-    return response.status(200).json({ message, createdUser });
+    return response.status(200).json("User created successfuly!");
   }
 }

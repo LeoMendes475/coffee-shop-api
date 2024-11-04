@@ -4,9 +4,12 @@ import { ProductEntity } from './entities/product.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProductCategoryController } from './product-category.controller';
 import { CategoryEntity } from './entities/product-category.entity';
-import { ProductCategoryService } from './productCategory.service';
 import { ProductRepository } from './persistence/product.repository';
-import { CreateProductUseCase } from './use-cases/create-product.use-case';
+import { CreateProductUseCase } from './use-cases/product/create-product.use-case';
+import { ProductCategoryRepository } from './persistence/product-category';
+import { CreateProductCategoryUseCase } from './use-cases/category/create-category.use-case';
+import { FindAllProductCategoryUseCase } from './use-cases/category/list-all-categories.use-case';
+import { FindAllProductsUseCase } from './use-cases/product/list-all-products.use-case';
 
 @Module({
   imports: [TypeOrmModule.forFeature([ProductEntity, CategoryEntity])],
@@ -16,8 +19,14 @@ import { CreateProductUseCase } from './use-cases/create-product.use-case';
       provide: 'IProductRepository',
       useClass: ProductRepository,
     },
-    ProductCategoryService,
     CreateProductUseCase,
+    FindAllProductsUseCase,
+    {
+      provide: 'IProductCategoryRepository',
+      useClass: ProductCategoryRepository,
+    },
+    CreateProductCategoryUseCase,
+    FindAllProductCategoryUseCase
   ],
 })
 export class ProductModule {}

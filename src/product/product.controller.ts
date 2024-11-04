@@ -11,40 +11,30 @@ import {
 import { Response } from 'express';
 
 import { CreateProductDto } from './dto';
-import { CreateProductUseCase } from './use-cases/create-product.use-case';
+import { CreateProductUseCase } from './use-cases/product/create-product.use-case';
+import { FindAllProductsUseCase } from './use-cases/product/list-all-products.use-case';
 
 @Controller('product')
 export class ProductController {
-  constructor(private readonly createProductUseCase: CreateProductUseCase) {}
+  constructor(
+    private readonly createProductUseCase: CreateProductUseCase,
+    private readonly findAllProductsUseCase: FindAllProductsUseCase
+  ) {}
+  @Get()
+  async categoryAllList(@Res() response: Response): Promise<any> {
+    const categoriesList = await this.findAllProductsUseCase.execute();
 
-  // @Get()
-  // async listAllProducts(@Res() response: Response) {
-  //   const productList = await this.productService.listAllProducts();
+    if (!categoriesList) return response.status(500).json(['Server error!']);
 
-  //   return response.status(200).json(productList);
-  // }
-
-  @Post()
-  async createProduct(@Body() dto: CreateProductDto) {
-    const product = await this.createProductUseCase.execute(dto);
-
-    return product;
+    return response.status(200).json(categoriesList);
   }
 
-  // @Put('/:id')
-  // async updateProduct(@Param('id') id: string, @Body() dto: EditProductDto) {
-  //   const { product, message } = await this.productService.updateProduct(
-  //     id,
-  //     dto,
-  //   );
+  @Post()
+  async createProduct(@Body() dto: CreateProductDto, @Res() response: Response) {
+    const product = await this.createProductUseCase.execute(dto);
 
-  //   return [product, message];
-  // }
+    if (!product) return response.status(500).json("Server error");
 
-  // @Delete('/:id')
-  // async deleteProduct(@Param('id') id: string) {
-  //   const { message } = await this.productService.deleteProduct(id);
-
-  //   return [message];
-  // }
+    return response.status(200).json("Product created successfuly!");
+  }
 }
