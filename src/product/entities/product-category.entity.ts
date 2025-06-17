@@ -24,14 +24,16 @@ export class CategoryEntity {
   @DeleteDateColumn({ name: 'deletedAt' })
   deletedAt: Date;
 
-  constructor(props: {
-    name: string;
-    description: string;
-    categoryId?: string;
-    createdAt?: Date;
-    deletedAt?: Date | null;
-  } = {} as any,
-  id?: string,) {
+  constructor(
+    props: {
+      name: string;
+      description: string;
+      categoryId?: string;
+      createdAt?: Date;
+      deletedAt?: Date | null;
+    } = {} as any,
+    id?: string,
+  ) {
     Object.assign(this, props);
 
     this.id = id ?? uuid();

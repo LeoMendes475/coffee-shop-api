@@ -4,7 +4,10 @@ import { ProductCategoryRepository } from 'src/product/persistence/product-categ
 
 @Injectable()
 export class FindAllProductCategoryUseCase {
-  constructor(@Inject('IProductCategoryRepository') private readonly productCategoryRepository: ProductCategoryRepository) {}
+  constructor(
+    @Inject('IProductCategoryRepository')
+    private readonly productCategoryRepository: ProductCategoryRepository,
+  ) {}
 
   async execute() {
     return this.productCategoryRepository.findAll();

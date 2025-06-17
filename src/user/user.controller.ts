@@ -9,7 +9,7 @@ import { ListAllUsersUseCase } from './use-cases/list-all-users.use-case';
 export class UserController {
   constructor(
     private readonly createUserUseCase: CreateUserUseCase,
-    private readonly listAllUsersUseCase: ListAllUsersUseCase
+    private readonly listAllUsersUseCase: ListAllUsersUseCase,
   ) {}
 
   @Get()
@@ -23,8 +23,8 @@ export class UserController {
   async createUser(@Body() dto: CreateUserDto, @Res() response: Response) {
     const user = await this.createUserUseCase.execute(dto);
 
-    if (!user) return response.status(500).json("Server error");
+    if (!user) return response.status(500).json('Server error');
 
-    return response.status(200).json("User created successfuly!");
+    return response.status(200).json('User created successfuly!');
   }
 }

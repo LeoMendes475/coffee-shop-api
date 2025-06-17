@@ -5,7 +5,10 @@ import { ProductRepository } from '../../persistence/product.repository';
 
 @Injectable()
 export class CreateProductUseCase {
-  constructor(@Inject('IProductRepository') private readonly productRepository: ProductRepository) {}
+  constructor(
+    @Inject('IProductRepository')
+    private readonly productRepository: ProductRepository,
+  ) {}
 
   async execute(dto: CreateProductDto) {
     const product = new ProductEntity(dto);

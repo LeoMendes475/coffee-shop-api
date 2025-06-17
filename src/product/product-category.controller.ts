@@ -9,7 +9,7 @@ import { FindAllProductCategoryUseCase } from './use-cases/category/list-all-cat
 export class ProductCategoryController {
   constructor(
     private readonly createProductCategoryUseCase: CreateProductCategoryUseCase,
-    private readonly findAllProductCategoryUseCase: FindAllProductCategoryUseCase
+    private readonly findAllProductCategoryUseCase: FindAllProductCategoryUseCase,
   ) {}
 
   @Get()
@@ -30,6 +30,6 @@ export class ProductCategoryController {
 
     if (!category) return response.status(500).json(['Server error!']);
 
-    return response.status(200).json("Category created successfuly!");
+    return response.status(200).json('Category created successfuly!');
   }
 }

@@ -1,13 +1,4 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Post,
-  Put,
-  Res,
-} from '@nestjs/common';
+import { Body, Controller, Get, Post, Res } from '@nestjs/common';
 import { Response } from 'express';
 
 import { CreateProductDto } from './dto';
@@ -18,7 +9,7 @@ import { FindAllProductsUseCase } from './use-cases/product/list-all-products.us
 export class ProductController {
   constructor(
     private readonly createProductUseCase: CreateProductUseCase,
-    private readonly findAllProductsUseCase: FindAllProductsUseCase
+    private readonly findAllProductsUseCase: FindAllProductsUseCase,
   ) {}
   @Get()
   async categoryAllList(@Res() response: Response): Promise<any> {
@@ -30,11 +21,14 @@ export class ProductController {
   }
 
   @Post()
-  async createProduct(@Body() dto: CreateProductDto, @Res() response: Response) {
+  async createProduct(
+    @Body() dto: CreateProductDto,
+    @Res() response: Response,
+  ) {
     const product = await this.createProductUseCase.execute(dto);
 
-    if (!product) return response.status(500).json("Server error");
+    if (!product) return response.status(500).json('Server error');
 
-    return response.status(200).json("Product created successfuly!");
+    return response.status(200).json('Product created successfuly!');
   }
 }

@@ -26,7 +26,7 @@ import { FindAllProductsUseCase } from './use-cases/product/list-all-products.us
       useClass: ProductCategoryRepository,
     },
     CreateProductCategoryUseCase,
-    FindAllProductCategoryUseCase
+    FindAllProductCategoryUseCase,
   ],
 })
 export class ProductModule {}

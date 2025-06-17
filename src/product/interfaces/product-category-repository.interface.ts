@@ -1,4 +1,4 @@
-import { CategoryEntity } from "../entities/product-category.entity";
+import { CategoryEntity } from '../entities/product-category.entity';
 
 export interface IProductCategoryRepository {
   create(product: CategoryEntity): Promise<CategoryEntity>;

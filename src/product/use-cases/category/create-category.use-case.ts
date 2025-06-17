@@ -6,7 +6,10 @@ import { ProductCategoryRepository } from 'src/product/persistence/product-categ
 
 @Injectable()
 export class CreateProductCategoryUseCase {
-  constructor(@Inject('IProductCategoryRepository') private readonly productCategoryRepository: ProductCategoryRepository) {}
+  constructor(
+    @Inject('IProductCategoryRepository')
+    private readonly productCategoryRepository: ProductCategoryRepository,
+  ) {}
 
   async execute(dto: CreateProductCategoryDto) {
     const product = new CategoryEntity(dto);
