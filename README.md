@@ -34,6 +34,8 @@ $ npm install
 $ npm build
 
 $ docker-compose up
+
+$ npm run db:migrate
 ```
 
 ## Running the app
