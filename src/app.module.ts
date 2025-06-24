@@ -14,7 +14,9 @@ import { PostgresConfigService } from './config/postgres.config.service';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    ProductModule, UserModule],
+    ProductModule,
+    UserModule,
+  ],
   controllers: [],
   providers: [],
 })

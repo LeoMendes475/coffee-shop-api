@@ -13,9 +13,9 @@ import { ListAllUsersUseCase } from './use-cases/list-all-users.use-case';
     {
       provide: 'IUserRepository',
       useClass: UserRepository,
-    }, 
+    },
     CreateUserUseCase,
-    ListAllUsersUseCase
+    ListAllUsersUseCase,
   ],
 })
-export class UserModule { }
+export class UserModule {}
