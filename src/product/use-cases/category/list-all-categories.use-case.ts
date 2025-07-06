@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 
-import { ProductCategoryRepository } from 'src/product/persistence/product-category';
+import { ProductCategoryRepository } from 'src/product/persistence/product-category.repository';
 
 @Injectable()
 export class FindAllProductCategoryUseCase {

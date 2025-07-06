@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 
 import { CreateProductCategoryDto } from 'src/product/dto/product-category.dto';
 import { CategoryEntity } from 'src/product/entities/product-category.entity';
-import { ProductCategoryRepository } from 'src/product/persistence/product-category';
+import { ProductCategoryRepository } from 'src/product/persistence/product-category.repository';
 
 @Injectable()
 export class CreateProductCategoryUseCase {
