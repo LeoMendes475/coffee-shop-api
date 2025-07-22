@@ -4,6 +4,7 @@ import { ProductModule } from './product/product.module';
 import { UserModule } from './user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PostgresConfigService } from './config/postgres.config.service';
+import { OrderModule } from './order/order.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { PostgresConfigService } from './config/postgres.config.service';
     }),
     ProductModule,
     UserModule,
+    OrderModule,
   ],
   controllers: [],
   providers: [],
