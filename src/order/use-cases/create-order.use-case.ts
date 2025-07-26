@@ -7,7 +7,7 @@ import { OrderItemEntity } from '../entities/orderItem.entity';
 @Injectable()
 export class CreateOrderUseCase {
   constructor(
-    @Inject('IOrderRepository')
+    @Inject('CreateOrderUseCase')
     private readonly orderRepository: OrderRepository,
   ) {}
 

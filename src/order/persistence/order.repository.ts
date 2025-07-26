@@ -4,13 +4,14 @@ import { Repository } from 'typeorm';
 import { IOrderRepository } from '../interfaces/order.interface';
 import { OrderItemEntity } from '../entities/orderItem.entity';
 import { CreateOrderResponseDto } from '../dto/order.dto';
+import { PaginatedOutputDto, PaginationDto } from 'src/utils/types';
 
 export class OrderRepository implements IOrderRepository {
   constructor(
     @InjectRepository(OrderEntity)
     private readonly repository: Repository<OrderEntity>,
     private readonly orderItemRepository: Repository<OrderItemEntity>,
-  ) {}
+  ) { }
 
   async create(order: OrderEntity): Promise<CreateOrderResponseDto['order']> {
     return this.repository.save(order);
@@ -22,7 +23,10 @@ export class OrderRepository implements IOrderRepository {
     return this.orderItemRepository.save(item);
   }
 
-  async listAll(): Promise<OrderEntity[]> {
-    return this.repository.find({ relations: ['items'] });
+  async listAll(paginationDto: PaginationDto): Promise<[OrderEntity[], number]> {
+    return this.repository.findAndCount({
+      take: paginationDto.take,
+      skip: paginationDto.skip,
+    });
   }
 }
