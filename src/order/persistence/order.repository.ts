@@ -2,8 +2,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { OrderEntity } from '../entities/order.entity';
 import { Repository } from 'typeorm';
 import { IOrderRepository } from '../interfaces/order.interface';
-import { CreateOrderDto, CreateOrderItemDto } from '../dto/order.dto';
 import { OrderItemEntity } from '../entities/orderItem.entity';
+import { CreateOrderResponseDto } from '../dto/order.dto';
 
 export class OrderRepository implements IOrderRepository {
   constructor(
@@ -12,18 +12,13 @@ export class OrderRepository implements IOrderRepository {
     private readonly orderItemRepository: Repository<OrderItemEntity>,
   ) {}
 
-  async create(order: CreateOrderDto): Promise<any> {
+  async create(order: OrderEntity): Promise<CreateOrderResponseDto['order']> {
     return this.repository.save(order);
   }
 
   async createOrderItem(
-    item: CreateOrderItemDto,
-    orderId: string,
+    item: OrderItemEntity
   ): Promise<OrderItemEntity> {
-    const orderProduct = this.orderItemRepository.create({
-      ...item,
-      order: { id: orderId } as OrderEntity,
-    });
-    return this.orderItemRepository.save(orderProduct);
+    return this.orderItemRepository.save(item);
   }
 }

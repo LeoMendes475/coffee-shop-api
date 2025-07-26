@@ -1,6 +1,5 @@
 import { CreateOrderUseCase } from 'src/order/use-cases/create-order.use-case';
 import { createOrder, createOrderItem } from '../factory/order.factory';
-import { v4 as uuid } from 'uuid';
 
 describe('CreateOrderUseCase', () => {
   let createOrderUseCase;
@@ -18,15 +17,33 @@ describe('CreateOrderUseCase', () => {
     // Arrange
     const order = createOrder();
     const items = [
-      createOrderItem({ id: uuid() }),
-      createOrderItem({ id: uuid() }),
+      createOrderItem(),
+      createOrderItem(),
     ];
+
+    const payload = {
+      totalValue: order.totalValue,
+      items
+    };
+
     // Act
-    const response = await createOrderUseCase.execute(order, items);
+    const response = await createOrderUseCase.execute(payload, 'user-123');
 
     // Assert
-    expect(response.order).toBe(order);
-    expect(response.items[0]).toBe(items[0]);
-    expect(response.items[1]).toBe(items[1]);
+    expect(response.order).toEqual(expect.objectContaining({
+      totalValue: order.totalValue,
+      userId: 'user-123',
+    }));
+
+    expect(response.items).toHaveLength(2);
+    expect(response.items[0]).toEqual(expect.objectContaining({
+      quantity: items[0].quantity,
+      price: items[0].price,
+    }));
+
+    expect(response.items[1]).toEqual(expect.objectContaining({
+      quantity: items[1].quantity,
+      price: items[1].price,
+    }));
   });
 });

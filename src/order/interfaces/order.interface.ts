@@ -1,6 +1,8 @@
 import { CreateOrderDto } from '../dto/order.dto';
 import { OrderEntity } from '../entities/order.entity';
+import { OrderItemEntity } from '../entities/orderItem.entity';
 
 export interface IOrderRepository {
-  create(order: CreateOrderDto): Promise<OrderEntity>;
+  create(order: OrderEntity): Promise<OrderEntity>;
+  createOrderItem(item: OrderItemEntity): Promise<OrderItemEntity>;
 }

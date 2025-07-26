@@ -10,23 +10,35 @@ export class CreateOrderDto {
 
 export class CreateOrderItemDto {
   @IsString()
-  productId: string;
+  orderId: string;
 
   @IsString()
-  userId: string;
+  productId: string;
 
   @IsNumber()
   quantity: number;
 
   @IsNumber()
   price: number;
+}
 
-  @IsNumber()
-  quantityAvailable: number;
-
-  @IsString()
-  description: string;
-
-  @IsString()
-  categoryId: string;
+export class CreateOrderResponseDto {
+  order: {
+    id: string;
+    totalValue: number;
+    userId: string;
+    createdAt: Date;
+    updatedAt: Date | null;
+    deletedAt: Date | null;
+  };
+  items: {
+    id: string;
+    orderId: string;
+    productId: string;
+    quantity: number;
+    price: number;
+    createdAt: Date;
+    updatedAt: Date | null;
+    deletedAt: Date | null;
+  }[];
 }

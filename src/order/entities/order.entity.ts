@@ -10,6 +10,9 @@ export class OrderEntity {
   totalValue: number;
 
   @Column()
+  userId: string;
+
+  @Column()
   createdAt: Date;
 
   @Column({ nullable: true })
@@ -21,6 +24,7 @@ export class OrderEntity {
   constructor(
     props: {
       totalValue: number;
+      userId: string;
       createdAt?: Date;
       updatedAt?: Date | null;
       deletedAt?: Date | null;
@@ -29,6 +33,7 @@ export class OrderEntity {
   ) {
     this.id = id ?? uuid();
     this.totalValue = props.totalValue;
+    this.userId = props.userId;
     this.createdAt = props.createdAt || new Date();
     this.updatedAt = props.updatedAt || null;
     this.deletedAt = props.deletedAt || null;
