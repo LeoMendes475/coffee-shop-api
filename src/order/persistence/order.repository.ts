@@ -21,4 +21,8 @@ export class OrderRepository implements IOrderRepository {
   ): Promise<OrderItemEntity> {
     return this.orderItemRepository.save(item);
   }
+
+  async listAll(): Promise<OrderEntity[]> {
+    return this.repository.find({ relations: ['items'] });
+  }
 }

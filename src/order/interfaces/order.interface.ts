@@ -5,4 +5,5 @@ import { OrderItemEntity } from '../entities/orderItem.entity';
 export interface IOrderRepository {
   create(order: OrderEntity): Promise<OrderEntity>;
   createOrderItem(item: OrderItemEntity): Promise<OrderItemEntity>;
+  listAll(): Promise<OrderEntity[]>;
 }
