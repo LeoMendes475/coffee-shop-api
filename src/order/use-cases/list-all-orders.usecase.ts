@@ -15,5 +15,4 @@ export class ListAllOrdersUseCase {
 
         return new PaginatedOutputDto<OrderEntity>(items, totalCount, skip, take);
     }
-
 }
