@@ -14,7 +14,7 @@ export class OrderEntity {
   userId: string;
 
   @Column()
-  status: string;
+  status: OrderStatus;
 
   @Column()
   createdAt: Date;
@@ -29,7 +29,7 @@ export class OrderEntity {
     props: {
       totalValue: number;
       userId: string;
-      status?: string;
+      status?: OrderStatus;
       createdAt?: Date;
       updatedAt?: Date | null;
       deletedAt?: Date | null;
